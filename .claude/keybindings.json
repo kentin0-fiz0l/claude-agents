@@ -1,0 +1,51 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
+  "$docs": "https://code.claude.com/docs/en/keybindings",
+  "bindings": [
+    {
+      "context": "Chat",
+      "bindings": {
+        "ctrl+e": "chat:externalEditor",
+        "alt+s": "chat:stash",
+        "ctrl+k ctrl+s": "chat:submit",
+        "ctrl+m": "chat:modelPicker",
+        "ctrl+shift+t": "chat:thinkingToggle"
+      }
+    },
+    {
+      "context": "Global",
+      "bindings": {
+        "ctrl+shift+o": "app:toggleTranscript",
+        "ctrl+shift+l": "app:toggleTodos"
+      }
+    },
+    {
+      "context": "Task",
+      "bindings": {
+        "ctrl+b": "task:background"
+      }
+    },
+    {
+      "context": "HistorySearch",
+      "bindings": {
+        "ctrl+n": "historySearch:next",
+        "ctrl+p": "historySearch:previous"
+      }
+    },
+    {
+      "context": "Confirmation",
+      "bindings": {
+        "ctrl+y": "confirm:yes",
+        "ctrl+n": "confirm:no"
+      }
+    },
+    {
+      "context": "DiffDialog",
+      "bindings": {
+        "j": "diff:nextFile",
+        "k": "diff:previousFile",
+        "q": "diff:dismiss"
+      }
+    }
+  ]
+}
