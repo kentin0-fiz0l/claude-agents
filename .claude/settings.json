@@ -1,9 +1,9 @@
 {
+  "respectGitignore": true,
+  "cleanupPeriodDays": 30,
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "respectGitignore": true,
-  "cleanupPeriodDays": 30,
   "permissions": {
     "allow": [
       "Bash(npm:*)",
@@ -38,10 +38,6 @@
     ]
   },
   "model": "claude-opus-4-5-20251101",
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/scripts/statusline.sh"
-  },
   "hooks": {
     "SessionStart": [
       {
@@ -75,8 +71,8 @@
           {
             "type": "prompt",
             "prompt": "Review this git commit. Check if sensitive files (.env, credentials, keys) are being committed. If so, respond with 'BLOCK: [reason]'. Otherwise respond 'ALLOW'. Commit info: $ARGUMENTS",
-            "statusMessage": "Security check",
-            "model": "claude-haiku-4-5-20251001"
+            "model": "claude-haiku-4-5-20251001",
+            "statusMessage": "Security check"
           }
         ]
       }
@@ -103,5 +99,12 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/scripts/statusline.sh"
+  },
+  "enabledPlugins": {
+    "commit-commands@claude-plugins-official": true
   }
 }
