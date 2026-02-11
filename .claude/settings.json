@@ -37,5 +37,67 @@
       "Read(**/*.key)"
     ]
   },
-  "model": "claude-opus-4-5-20251101"
+  "model": "claude-opus-4-5-20251101",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🚀 Claude Code session started in:'$(pwd)",
+            "statusMessage": "Starting session"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "file=\"$CLAUDE_FILE_PATH\"; if [[ \"$file\" == *.js || \"$file\" == *.ts || \"$file\" == *.jsx || \"$file\" == *.tsx ]]; then npx prettier --write \"$file\" 2>/dev/null || true; fi",
+            "timeout": 10,
+            "statusMessage": "Formatting code",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit:*)",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Review this git commit. Check if sensitive files (.env, credentials, keys) are being committed. If so, respond with 'BLOCK: [reason]'. Otherwise respond 'ALLOW'. Commit info: $ARGUMENTS",
+            "statusMessage": "Security check",
+            "model": "claude-haiku-4-5-20251001"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff 2>/dev/null || true",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Task completed\" with title \"Claude Code\"' 2>/dev/null || true",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
 }
