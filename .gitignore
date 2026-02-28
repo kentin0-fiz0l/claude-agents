@@ -1,0 +1,26 @@
+# Ignore everything by default
+*
+
+# Allow tracked project files
+!CLAUDE.md
+!README.md
+!.gitignore
+
+# Allow .claude config (agents, commands, settings)
+!.claude/
+.claude/*
+!.claude/agents/
+!.claude/agents/**
+!.claude/commands/
+!.claude/commands/**
+!.claude/keybindings.json
+!.claude/scripts/
+!.claude/scripts/**
+!.claude/settings.json
+
+# Allow Travel notes
+!Projects/
+Projects/*
+!Projects/Travel/
+Projects/Travel/*
+!Projects/Travel/**
