@@ -55,7 +55,19 @@
         "hooks": [
           {
             "type": "command",
-            "command": "file=\"$CLAUDE_FILE_PATH\"; if [[ \"$file\" == *.js || \"$file\" == *.ts || \"$file\" == *.jsx || \"$file\" == *.tsx ]]; then npx prettier --write \"$file\" 2>/dev/null || true; fi",
+            "command": "file=\"$CLAUDE_FILE_PATH\"; if [[ \"$file\" == *.js || \"$file\" == *.ts || \"$file\" == *.jsx || \"$file\" == *.tsx ]]; then npx prettier --write \"$file\" 2>/dev/null || true; elif [[ \"$file\" == *.py ]]; then ruff format \"$file\" 2>/dev/null || true; fi",
+            "timeout": 10,
+            "statusMessage": "Formatting code",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "file=\"$CLAUDE_FILE_PATH\"; if [[ \"$file\" == *.js || \"$file\" == *.ts || \"$file\" == *.jsx || \"$file\" == *.tsx ]]; then npx prettier --write \"$file\" 2>/dev/null || true; elif [[ \"$file\" == *.py ]]; then ruff format \"$file\" 2>/dev/null || true; fi",
             "timeout": 10,
             "statusMessage": "Formatting code",
             "async": true
@@ -72,6 +84,56 @@
             "prompt": "Review this git commit. Check if sensitive files (.env, credentials, keys) are being committed. If so, respond with 'BLOCK: [reason]'. Otherwise respond 'ALLOW'. Commit info: $ARGUMENTS",
             "model": "claude-haiku-4-5-20251001",
             "statusMessage": "Security check"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(rm -rf:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'BLOCK: rm -rf is destructive. Use trash or confirm with user first.'",
+            "statusMessage": "Destructive command guard"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(rm -r:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'BLOCK: rm -r is destructive. Use trash or confirm with user first.'",
+            "statusMessage": "Destructive command guard"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git push --force:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'BLOCK: Force push can destroy remote history. Confirm with user first.'",
+            "statusMessage": "Destructive command guard"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git push -f:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'BLOCK: Force push can destroy remote history. Confirm with user first.'",
+            "statusMessage": "Destructive command guard"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git reset --hard:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'BLOCK: Hard reset discards uncommitted changes. Confirm with user first.'",
+            "statusMessage": "Destructive command guard"
           }
         ]
       }
