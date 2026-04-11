@@ -9,7 +9,9 @@
         "alt+s": "chat:stash",
         "ctrl+k ctrl+s": "chat:submit",
         "ctrl+m": "chat:modelPicker",
-        "ctrl+shift+t": "chat:thinkingToggle"
+        "ctrl+shift+t": "chat:thinkingToggle",
+        "ctrl+p": "chat:planToggle",
+        "ctrl+shift+v": "chat:voiceToggle"
       }
     },
     {

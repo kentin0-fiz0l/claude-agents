@@ -10,17 +10,44 @@
       "Bash(npx:*)",
       "Bash(yarn:*)",
       "Bash(pnpm:*)",
+      "Bash(bun:*)",
+      "Bash(deno:*)",
       "Bash(git:*)",
+      "Bash(gh:*)",
       "Bash(poetry:*)",
       "Bash(python:*)",
+      "Bash(python3:*)",
       "Bash(pip:*)",
+      "Bash(uv:*)",
+      "Bash(ruff:*)",
       "Bash(node:*)",
+      "Bash(cargo:*)",
+      "Bash(docker:*)",
+      "Bash(docker-compose:*)",
+      "Bash(brew:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(mkdir:*)",
       "Bash(cp:*)",
       "Bash(mv:*)",
-      "WebFetch"
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
+      "Bash(which:*)",
+      "Bash(pwd:*)",
+      "Bash(wc:*)",
+      "Bash(date:*)",
+      "Bash(diff:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(xargs:*)",
+      "Bash(jq:*)",
+      "Bash(curl:*)",
+      "Bash(afplay:*)",
+      "Bash(osascript:*)",
+      "WebFetch",
+      "WebSearch"
     ],
     "deny": [
       "Read(**/.env)",
@@ -43,8 +70,19 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '🚀 Claude Code session started in:'$(pwd)",
+            "command": "branch=$(git branch --show-current 2>/dev/null || echo '-'); changes=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' '); echo \"startup hook success: 🚀 Claude Code session started in:$(pwd)\"",
             "statusMessage": "Starting session"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Session ended\" with title \"Claude Code\"' 2>/dev/null || true",
+            "async": true
           }
         ]
       }
@@ -138,6 +176,28 @@
         ]
       }
     ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Pop.aiff 2>/dev/null || true",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Blow.aiff 2>/dev/null || true",
+            "async": true
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
@@ -167,6 +227,8 @@
   },
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
-  }
+    "typescript-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true
+  },
+  "autoMemoryEnabled": true
 }
