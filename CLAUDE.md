@@ -1,10 +1,10 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working in this workspace.
+You can use this file to configure how Claude Code works in your workspace.
 
-## Active Projects
+## Active projects
 
-All active projects are located in `/Users/kentino/Projects/Active/`:
+You'll find all your active projects in `/Users/kentino/Projects/Active/`. The following table shows what each project does:
 
 | Project | Description | Tech Stack |
 |---------|-------------|------------|
@@ -16,10 +16,12 @@ All active projects are located in `/Users/kentino/Projects/Active/`:
 | **FluxPrint** | 3D printing management | React, Node.js |
 | **Vancouver-Move** | Relocation research: Campbell CA to Vancouver WA | Markdown (property tracker, financing, neighborhoods) |
 | **EmbeddedSystems** | Full-stack hardware development | C/C++, KiCad, PlatformIO, Python |
-| **MOOVE** | TBD | TBD |
-| **Marvell-KB** | TBD | TBD |
+| **MOOVE** | Project in planning | TBD |
+| **Marvell-KB** | Keyboard firmware development | TBD |
 
-## Quick Commands by Project
+## Quick commands by project
+
+Use these commands to get started with each project:
 
 ### TaskOwl
 ```bash
@@ -65,7 +67,9 @@ cd ~/Projects/Active/EmbeddedSystems
 # pio run -t upload
 ```
 
-## Architecture Patterns
+## Architecture patterns
+
+These are the common architectural patterns used across the projects:
 
 ### Frontend Projects (TaskOwl, FluxStudio, Not a Label)
 - React with functional components and hooks
@@ -85,7 +89,9 @@ cd ~/Projects/Active/EmbeddedSystems
 - ESP32 hardware integration for voice interface
 - Supports local and server deployment modes
 
-## Code Quality Standards
+## Code quality standards
+
+Follow these standards for all code contributions:
 
 1. **Security First**: Never commit API keys or secrets
 2. **Type Safety**: Use TypeScript where available
@@ -93,13 +99,15 @@ cd ~/Projects/Active/EmbeddedSystems
 4. **Error Handling**: Proper try/catch and error responses
 5. **Documentation**: Update README for significant changes
 
-## Session Naming Convention
+## Session naming convention
 
-Use descriptive session names for easy resumption:
+You can use descriptive session names for easier resumption:
 - `{project}-{feature}` (e.g., `fluxstudio-auth-refactor`)
 - `{project}-{bugfix}` (e.g., `taskowl-api-fix`)
 
-## Slash Commands
+## Slash commands
+
+Use these commands to perform common development tasks:
 
 | Command | Purpose |
 |---------|---------|
@@ -115,9 +123,9 @@ Use descriptive session names for easy resumption:
 | `/deps` | Dependency audit |
 | `/simplify` | Code simplification pass |
 
-## Agent Team
+## Agent team
 
-Custom agents in `~/.claude/agents/` for orchestrated reviews:
+The following custom agents in `~/.claude/agents/` work together for orchestrated code reviews:
 - **code-reviewer**: Code quality, patterns, bugs, test coverage
 - **security-reviewer**: Vulnerabilities, auth, injection, secrets
 - **code-simplifier**: Complexity, readability, dead code
@@ -129,6 +137,8 @@ Custom agents in `~/.claude/agents/` for orchestrated reviews:
 
 ## Keybindings
 
+You can use these keyboard shortcuts for quick actions:
+
 | Shortcut | Action |
 |----------|--------|
 | `Ctrl+P` | Toggle plan mode |
@@ -139,6 +149,6 @@ Custom agents in `~/.claude/agents/` for orchestrated reviews:
 | `Alt+S` | Stash chat |
 | `Ctrl+B` | Background task |
 
-## Archived Projects
+## Archived projects
 
-Located in `/Users/kentino/Projects/Archived/` - reference only, not actively developed.
+You'll find archived projects in `/Users/kentino/Projects/Archived/`. Use them for reference only—they're no longer actively developed.
