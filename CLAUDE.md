@@ -17,6 +17,7 @@ You'll find all your active projects in `/Users/kentino/Projects/Active/`. The f
 | **Vancouver-Move** | Relocation research: Campbell CA to Vancouver WA | Markdown (property tracker, financing, neighborhoods) |
 | **EmbeddedSystems** | Full-stack hardware development | C/C++, KiCad, PlatformIO, Python |
 | **AudioForge** | DAW plugin development (VST3) | C++17, JUCE framework |
+| **HandTrack3D** | Webcam-based 3D hand interaction prototype | React, Three.js, MediaPipe, TypeScript |
 | **MOOVE** | Project in planning | TBD |
 | **Marvell-KB** | Keyboard firmware development | TBD |
 
@@ -78,15 +79,25 @@ cmake -B build && cmake --build build
 cp -r build/SimpleGain_artefacts/VST3/SimpleGain.vst3 ~/Library/Audio/Plug-Ins/VST3/
 ```
 
+### HandTrack3D
+```bash
+cd ~/Projects/Active/HandTrack3D
+pnpm install
+pnpm dev  # http://localhost:5173
+# Allow webcam, then use hand gestures to interact with 3D objects
+# Pinch to grab, open hand to release
+```
+
 ## Architecture patterns
 
 These are the common architectural patterns used across the projects:
 
-### Frontend Projects (TaskOwl, FluxStudio, Not a Label)
+### Frontend Projects (TaskOwl, FluxStudio, Not a Label, HandTrack3D)
 - React with functional components and hooks
-- State management varies by project
-- JWT authentication with bcrypt
+- State management varies by project (Zustand for HandTrack3D)
+- JWT authentication with bcrypt (where applicable)
 - Responsive design with CSS-in-JS or Tailwind
+- HandTrack3D uses React Three Fiber for 3D rendering
 
 ### Backend Services
 - Express.js or FastAPI for APIs
