@@ -16,6 +16,7 @@ You'll find all your active projects in `/Users/kentino/Projects/Active/`. The f
 | **FluxPrint** | 3D printing management | React, Node.js |
 | **Vancouver-Move** | Relocation research: Campbell CA to Vancouver WA | Markdown (property tracker, financing, neighborhoods) |
 | **EmbeddedSystems** | Full-stack hardware development | C/C++, KiCad, PlatformIO, Python |
+| **AudioForge** | DAW plugin development (VST3) | C++17, JUCE framework |
 | **MOOVE** | Project in planning | TBD |
 | **Marvell-KB** | Keyboard firmware development | TBD |
 
@@ -65,6 +66,16 @@ cd ~/Projects/Active/EmbeddedSystems
 # Firmware build (PlatformIO)
 # pio run -e <env>
 # pio run -t upload
+```
+
+### AudioForge
+```bash
+cd ~/Projects/Active/AudioForge
+# Build SimpleGain plugin
+cd plugins/SimpleGain
+cmake -B build && cmake --build build
+# Install to system plugin folder
+cp -r build/SimpleGain_artefacts/VST3/SimpleGain.vst3 ~/Library/Audio/Plug-Ins/VST3/
 ```
 
 ## Architecture patterns
