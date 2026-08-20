@@ -5,8 +5,9 @@
 !CLAUDE.md
 !README.md
 !.gitignore
+!.zshrc
 
-# Allow .claude config (agents, commands, settings)
+# Allow .claude config (agents, commands, settings, skills)
 !.claude/
 .claude/*
 !.claude/agents/
@@ -17,6 +18,9 @@
 !.claude/scripts/
 !.claude/scripts/**
 !.claude/settings.json
+!.claude/skills/
+!.claude/skills/**
+!.claude/claude_desktop_config.json
 
 # Allow Travel notes
 !Projects/
