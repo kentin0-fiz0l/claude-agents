@@ -20,6 +20,7 @@ You'll find all your active projects in `/Users/kentino/Projects/Active/`. The f
 | **HandTrack3D** | Webcam-based 3D hand interaction prototype | React, Three.js, MediaPipe, TypeScript |
 | **MOOVE** | Project in planning | TBD |
 | **Marvell-KB** | Keyboard firmware development | TBD |
+| **homelab-scripts** | Homelab AI deployment scripts and research | Bash, Docker, Prometheus, Grafana |
 
 ## Quick commands by project
 
@@ -86,6 +87,16 @@ pnpm install
 pnpm dev  # http://localhost:5173
 # Allow webcam, then use hand gestures to interact with 3D objects
 # Pinch to grab, open hand to release
+```
+
+### homelab-scripts
+```bash
+cd ~/Projects/Active/homelab-scripts
+shellcheck *.sh helpers/*.sh       # Lint all scripts
+bash shopping-list.sh              # Interactive shopping list
+bash quick-start.sh                # Full deployment (on target server)
+# Individual setup steps:
+# bash 01-base-setup.sh through 08-maintenance-setup.sh
 ```
 
 ## Architecture patterns
