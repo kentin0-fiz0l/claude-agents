@@ -21,6 +21,7 @@ You'll find all your active projects in `/Users/kentino/Projects/Active/`. The f
 | **MOOVE** | Project in planning | TBD |
 | **Marvell-KB** | Keyboard firmware development | TBD |
 | **homelab-scripts** | Homelab AI deployment scripts and research | Bash, Docker, Prometheus, Grafana |
+| **voice-harness** | Minimal voice assistant (mic → STT → Ollama → TTS) | Python, faster-whisper, PyAudio |
 
 ## Quick commands by project
 
@@ -97,6 +98,20 @@ bash shopping-list.sh              # Interactive shopping list
 bash quick-start.sh                # Full deployment (on target server)
 # Individual setup steps:
 # bash 01-base-setup.sh through 08-maintenance-setup.sh
+```
+
+### voice-harness
+```bash
+cd ~/Projects/Active/voice-harness
+pip install -r requirements.txt
+# Copy and edit .env
+cp .env.example .env
+# Run (default: PTT mode, local Ollama)
+python main.py
+# Remote Ollama (homelab)
+OLLAMA_HOST=http://192.168.x.x:11434 python main.py
+# VAD (hands-free) mode
+INPUT_MODE=vad python main.py
 ```
 
 ## Architecture patterns
