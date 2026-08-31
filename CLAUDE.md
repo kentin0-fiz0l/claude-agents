@@ -22,6 +22,7 @@ You'll find all your active projects in `/Users/kentino/Projects/Active/`. The f
 | **Marvell-KB** | Keyboard firmware development | TBD |
 | **homelab-scripts** | Homelab AI deployment scripts and research | Bash, Docker, Prometheus, Grafana |
 | **voice-harness** | Minimal voice assistant (mic → STT → Ollama → TTS) | Python, faster-whisper, PyAudio |
+| **MarchingArts** | Marching band SOPs & organizational knowledge base | Markdown (git + Google Drive) |
 
 ## Quick commands by project
 
@@ -112,6 +113,15 @@ python main.py
 OLLAMA_HOST=http://192.168.x.x:11434 python main.py
 # VAD (hands-free) mode
 INPUT_MODE=vad python main.py
+```
+
+### MarchingArts
+```bash
+cd ~/Projects/Active/MarchingArts
+# Find all TODOs needing program-specific details
+grep -r "TODO" --include="*.md" .
+# View structure
+find . -name "*.md" | sort
 ```
 
 ## Architecture patterns
