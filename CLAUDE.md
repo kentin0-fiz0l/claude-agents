@@ -124,6 +124,128 @@ grep -r "TODO" --include="*.md" .
 find . -name "*.md" | sort
 ```
 
+## Homelab AI Infrastructure
+
+### Overview
+
+Self-hosted GPU inference server for embedded devices, voice assistants, and creative tools. Replaces cloud SaaS with on-premises compute and mesh networking.
+
+**Selected Hardware Path**: Dual RTX 3090 + NVLink (Phase 2)  
+**Target Cost**: ~$3,000–3,500  
+**Performance**: 14–18 tok/s on 70B models, 40–50 tok/s on 27B models
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   HOMELAB HARDWARE                           │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  GPU INFERENCE SERVER                                  │ │
+│  │  • 2x RTX 3090 24GB (48GB pooled VRAM)                │ │
+│  │  • Dell T5820/HP Z4 G4 workstation                    │ │
+│  │  • 64-128GB ECC RAM                                    │ │
+│  │  • Ubuntu Server 24.04 LTS                            │ │
+│  │  • Ollama + vLLM + Open WebUI                         │ │
+│  │  • Prometheus + Grafana monitoring                    │ │
+│  │  • Tailscale mesh VPN                                 │ │
+│  └────────────────────────────────────────────────────────┘ │
+└──────────────────┬───────────────────────────────────────────┘
+                   │
+    ┌──────────────┴────────────┬────────────────┬──────────────┐
+    ▼                           ▼                ▼              ▼
+┌───────────┐          ┌─────────────┐    ┌──────────┐   ┌──────────┐
+│ ESP32     │          │ 3D Printer  │    │ Voice    │   │ Hand     │
+│ Devices   │          │ (FluxPrint) │    │ Clients  │   │ Tracking │
+│ (01)      │          │             │    │ (01,     │   │ Devices  │
+│           │          │             │    │  voice-  │   │          │
+│ Custom HW │          │             │    │  harness)│   │          │
+└───────────┘          └─────────────┘    └──────────┘   └──────────┘
+```
+
+### Deployment Strategy
+
+**Phase 1** (In Progress): Single RTX 3090 (~$1,500)
+- Build base infrastructure
+- Validate with ESP32 devices and voice assistant
+- Test 27B model performance (35–40 tok/s)
+
+**Phase 2** (Planned): Add 2nd RTX 3090 + NVLink (~$900–1,100)
+- Upgrade when daily 70B model use is validated
+- Enables multi-user serving (5–10 concurrent)
+- Pools VRAM for 48GB total
+
+**Phase 3** (Future): Infrastructure hardening
+- NAS for model storage (Synology DS220+)
+- 10GbE networking
+- UPS for clean shutdown
+
+### Key Documentation
+
+- **`homelab-scripts/GETTING-STARTED.md`** — Hardware paths guide for friends
+- **`homelab-scripts/hardware-comparison.md`** — Dual 3090 vs Mac Studio deep dive
+- **`homelab-scripts/gpu-inference-proposal.md`** — Detailed Phase 1 build plan
+- **`homelab-scripts/homelab-research.md`** — Comprehensive 159KB hardware research
+- **`homelab-scripts/shopping-list.sh`** — Interactive shopping list generator
+
+### Performance Targets
+
+| Model | Single RTX 3090 | Dual RTX 3090 NVLink |
+|-------|----------------|---------------------|
+| Qwen3.8 27B Q4 | 35–40 tok/s | 40–50 tok/s |
+| Llama 3.1 70B Q4 | 3–5 tok/s (offload) | 14–18 tok/s |
+| DeepSeek-R1 32B Q4 | 20–25 tok/s | 30–35 tok/s |
+| Llama 3.1 8B Q8 | 65–90 tok/s | 80–120 tok/s |
+| Max VRAM | 24GB | 48GB |
+| Concurrent users | 2–3 | 5–10 (with vLLM) |
+| ESP32 devices | 5–10 | 20+ (with batching) |
+
+### Ecosystem Integration
+
+**EmbeddedSystems** + **homelab-scripts** = Connected System
+- ESP32 devices (voice, sensors, controllers) → Homelab backend
+- Voice assistants (01 Project, voice-harness) → GPU inference
+- 3D printer (FluxPrint) → Device management APIs
+- HandTrack3D → Gesture-based control interface
+- Mesh networking → Share compute with friends (optional)
+
+### Quick Commands
+
+```bash
+# Deploy full homelab stack (Phase 1)
+cd ~/Projects/Active/homelab-scripts
+bash quick-start.sh
+
+# Individual setup steps
+bash 01-base-setup.sh       # Ubuntu hardening, Docker
+bash 02-nvidia-setup.sh     # NVIDIA drivers
+bash 03-ollama-setup.sh     # Ollama + models
+bash 04-vllm-setup.sh       # vLLM (multi-user serving)
+bash 05-deploy-stack.sh     # Open WebUI, monitoring
+bash 06-tailscale-setup.sh  # Mesh VPN
+
+# Generate shopping list for your hardware path
+bash shopping-list.sh
+
+# Check server health
+curl http://localhost:11434/api/tags  # Ollama models
+docker ps  # Running services
+nvidia-smi  # GPU status
+```
+
+### Cost Analysis (3-Year Ownership)
+
+| Component | Cost |
+|-----------|------|
+| Base workstation (used) | $320–580 |
+| 1st RTX 3090 (used) | $820–1,050 |
+| 2nd RTX 3090 (used) | $820–1,050 |
+| NVLink bridge | $80–120 |
+| **Hardware Total** | **$2,940–3,500** |
+| Electricity (3yr @ 105W idle) | $414 |
+| **TOTAL (3yr)** | **$3,354–3,914** |
+
+**ROI**: Pays for itself in 4–8 months vs cloud APIs ($100–400/month)
+
 ## Architecture patterns
 
 These are the common architectural patterns used across the projects:
